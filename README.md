@@ -9,6 +9,7 @@ An open-source toy attempt to embedding GPT-4 (GPT3.5) into GitHub issues.
 - Create an [issue](https://github.com/xihajun/issueGPT/issues/new/choose)
 - Wait for response
 <img width="807" alt="image" src="https://user-images.githubusercontent.com/25631641/235376951-35a1447c-f5da-4522-8e71-7ede8d90b669.png">
-## Contributor
+
+## Contributors
 
 @xihajun
