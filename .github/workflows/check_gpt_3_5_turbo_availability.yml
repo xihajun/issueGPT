@@ -1,5 +1,10 @@
-name: Check GPT-3.5-turbo Availability
+# .github/workflows/check_gpt_3_5_turbo_availability.yml
 
+# This workflow checks the availability of the GPT-3.5-turbo model
+# and creates an issue or adds a comment if it's not available.
+
+# Workflow triggers: manual and scheduled every two days
+name: Check GPT-3.5-turbo Availability
 on:
   workflow_dispatch:
   schedule:
@@ -10,28 +15,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Check the availability of the GPT-3.5-turbo model using the OpenAI API
     - name: Check GPT-3.5-turbo availability
       env:
-        OPENAI_API_KEY: \${{ secrets.OPENAI_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
-        response=\$(curl -s -H "Authorization: Bearer \$OPENAI_API_KEY" https://api.openai.com/v1/models/gpt-3.5-turbo)
-        if echo \$response | grep -q "\\"id\\": \\"gpt-3.5-turbo\\""; then
+        response=$(curl -s -H "Authorization: Bearer $OPENAI_API_KEY" https://api.openai.com/v1/models/gpt-3.5-turbo)
+        if echo $response | grep -q "\"id\": \"gpt-3.5-turbo\""; then
           echo "GPT-3.5-turbo is available." >&2
-          echo "available=true" >> \$GITHUB_ENV
+          echo "available=true" >> $GITHUB_ENV
         else
           echo "GPT-3.5-turbo is not available." >&2
-          echo "available=false" >> \$GITHUB_ENV
+          echo "available=false" >> $GITHUB_ENV
         fi
 
+    # Create an issue or add a comment if the GPT-3.5-turbo model is not available
     - name: Create issue or comment if not available
       if: env.available == 'false'
       uses: actions/github-script@v5
       with:
         script: |
+          // Define issue and comment details
           const issueTitle = "GPT-3.5-turbo is not available";
           const issueBody = "It seems that the GPT-3.5-turbo model is not available. Please check the API or the model status.";
-          const commentBody = \`GPT-3.5-turbo is not available at \${new Date().toISOString()}\`;
+          const commentBody = `GPT-3.5-turbo is not available at ${new Date().toISOString()}`;
 
+          // Search for an existing open issue with the same title
           const issues = await github.rest.issues.listForRepo({
             owner: context.repo.owner,
             repo: context.repo.repo,
@@ -41,6 +50,7 @@ jobs:
 
           const existingIssue = issues.data.find(issue => issue.title === issueTitle);
 
+          // If there's no existing issue, create a new one
           if (!existingIssue) {
             await github.rest.issues.create({
               owner: context.repo.owner,
@@ -49,6 +59,7 @@ jobs:
               body: issueBody,
               labels: ["gpt-3.5-turbo-unavailable"]
             });
+          // If there's an existing issue, add a comment with the current date and time
           } else {
             await github.rest.issues.createComment({
               owner: context.repo.owner,
