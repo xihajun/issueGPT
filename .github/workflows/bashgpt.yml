@@ -11,14 +11,16 @@ jobs:
 
     steps:
       - name: git clone
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 1
-      - name: install python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install openai
-          pip install --upgrade tiktoken
+            fetch-depth: 1
+
+      - name: Install Python Packages
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+      - run: pip install -r .github/requirements.txt
 
       - name: Get all issue comments
         env: 

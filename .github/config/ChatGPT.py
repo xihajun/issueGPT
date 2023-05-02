@@ -44,8 +44,15 @@ with open("comments.json", 'r') as data_file:
 
 data = json.loads(json_data)
 
-# Generate the desired format
-conversations = [{"role": "system","content": "Assume that you are a IT assistant to help people to generate the code to run the simple script and create files"}]
+with open("issue_content.txt", 'r') as issue_file:
+    issue_content = issue_file.read().strip()
+
+if issue_content:
+    system_message = issue_content
+else:
+    system_message = "Assume that you are an IT assistant to help people generate the code to run simple scripts and create files"
+
+conversations = [{"role": "system", "content": system_message}]
 for item in data:
     if item["user"]["login"] != "github-actions[bot]":
         conversations.append({"role": "user", "content": item["body"]})

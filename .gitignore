@@ -1,2 +1,3 @@
 .github/comment-template.md
-comments.json
+*.json
+*.txt
