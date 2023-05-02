@@ -1,7 +1,7 @@
 ---
-name: BashGPT bot
-about: BashGPT bot
-title: "[CHAT]"
+name: BashGPT
+about: BashGPT for GitHub manipulation
+title: "[BashGPT] "
 labels: bashGPT
 assignees: ''
 
