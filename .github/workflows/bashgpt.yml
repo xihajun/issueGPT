@@ -26,7 +26,7 @@ jobs:
         run: |
           mkdir -p .github
           curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X GET "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" -o comments.json
-          python3 ./github/config/bashGPT.py
+          python3 .github/config/bashGPT.py
 
       - name: Create comment
         id: create_comment
@@ -40,7 +40,7 @@ jobs:
         env: 
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          python3 ./github/config/extract_and_execute_bot_comment.py
+          python3 .github/config/extract_and_execute_bot_comment.py
 
       - name: Update comment with output
         if: steps.execute_code.outputs.code_output != ''
