@@ -60,12 +60,9 @@ if token_length <= 4000:
     )
     answer = completion.choices[0].message.content
 else:
-    answer = "信息太长了啦，请关闭这个issue[点此]()重来，都怪你！"
+    answer = "信息太长了啦，请关闭这个issue[点此](https://github.com/xihajun/issueGPT/issues/new?assignees=&labels=GPT3.5&template=chatgpt.md&title=%5BCHAT%5D)重来，都怪你！"
 
 with open(".github/comment-template.md", 'a') as f:
     f.write(answer)
 
 print(answer)
-
-with open(".github/comment-template.md", 'a') as f:
-    f.write(answer)
