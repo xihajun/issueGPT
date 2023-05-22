@@ -1,6 +1,6 @@
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited]
 jobs:
   OpenAI_Reply:
     if: "contains(github.event.issue.labels.*.name, 'image')"
