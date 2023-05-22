@@ -1,6 +1,9 @@
 # IssueGPT
 IssueGPT is an AI GitHub Assistant which embedded GPT-4 (GPT3.5) into GitHub issues (depends on your API).
 
+![ezgif com-crop](https://github.com/xihajun/issueGPT/assets/25631641/a22cfe25-aac4-45ac-87d6-29c1373c74c0)
+
+
 ## How to use it?
 - [Use this template](https://github.com/xihajun/issueGPT/generate)
 - Get an OpenAI [API Key](https://platform.openai.com/account/api-keys)
