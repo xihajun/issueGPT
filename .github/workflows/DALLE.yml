@@ -25,7 +25,7 @@ jobs:
           OUTPUTFILE: ".github/comment-template.md"
           BODY: ${{ github.event.comment.body }}
         run: |
-          mkdir -p .github && wget https://raw.githubusercontent.com/xihajun/image/main/img/dalle.py && python dalle.py "$BODY"
+          mkdir -p .github && wget https://raw.githubusercontent.com/xihajun/image/main/img/dalle.py -O .github/config/dalle.py && python .github/config/dalle.py "$BODY"
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
