@@ -15,4 +15,4 @@ IssueGPT is an AI GitHub Assistant which embedded GPT-4 (GPT3.5) into GitHub iss
 
 ## Contributors
 
-@xihajun
+@xihajun @chatgpt
